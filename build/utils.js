@@ -47,11 +47,18 @@ exports.cssLoaders = function (options) {
     }
   }
 
+  const defaultTheme = `../node_modules/muse-ui/src/styles/themes/variables/default.less`;
+  const themePath = path.resolve(__dirname, defaultTheme);
+
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
   return {
     css: generateLoaders(),
     postcss: generateLoaders(),
-    less: generateLoaders('less'),
+    less: generateLoaders('less', {
+      globalVars: {
+        museUiTheme: `'${themePath}'`
+      }
+    }),
     sass: generateLoaders('sass', { indentedSyntax: true }),
     scss: generateLoaders('sass'),
     stylus: generateLoaders('stylus'),
